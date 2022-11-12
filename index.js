@@ -9,6 +9,8 @@ app.use(cors({
 
 app.use(express.json());
 
+require('./routes/converter')(app);
+
 const port = 4000;
 const start = async () => {
   app.listen(port, () => {
