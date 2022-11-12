@@ -1,3 +1,4 @@
+//import packages
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -10,12 +11,11 @@ app.use(express.json());
 
 require('./routes/converter')(app);
 
-
-const port = 4000
+const port = 4000;
 const start = async () => {
-    app.listen(port, () => {
-        console.log(`App running on port ${port} ......`)
-    })
+  app.listen(port, () => {
+    console.log(`App running on port ${port} ......`);
+  });
 };
 
 start();
