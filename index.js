@@ -16,7 +16,6 @@ app.use(
     origin: '*',
   })
 );
-
 //express Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
