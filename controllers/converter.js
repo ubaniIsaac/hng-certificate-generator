@@ -5,6 +5,7 @@ const fs = require('fs');
 exports.converter = async (req, res) => {
     const file = req.file
     const jsonArr = []
+    correctFormat = true
     try {
         if (!file) {
             return res.status(400).json({ message: "Input a file" })
@@ -18,13 +19,18 @@ exports.converter = async (req, res) => {
             }))
             .on("data", async (row) => {
                 jsonArr.push(row);
-                jsonArr.forEach((row) => {
-                    if (!row.name || !row.organization || !row.award || !row.description || !row.date || !row.certificate_number) {
-                        return res.status(400).json({ 'Input a file with correct format!!'});
-                    }
-                })
             })
             .on('end', function () {
+                jsonArr.every((row) => {
+                    if (!row.name || !row.organization || !row.award || !row.description || !row.date || !row.certificate_number) {
+                        correctFormat = false
+                        return false
+                    }
+                    return true
+                })
+                if (!correctFormat) {
+                    return res.json({ message: 'Input a file with correct format!!' })
+                }
                 res.send(jsonArr)
             })
     }
