@@ -1,7 +1,6 @@
 import express from 'express';
-import { converter } from '../controllers/converter.js';
+import { uploadCsv } from '../controllers/uploadCsv.js';
 const router = express.Router();
 
-router.get('/', converter);
-
+router.post('/', uploadCsv);
 export default router;
